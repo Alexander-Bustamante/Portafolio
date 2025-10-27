@@ -38,7 +38,31 @@ document.addEventListener('DOMContentLoaded', () => {
     activateNavLink();
     window.addEventListener('scroll', activateNavLink);
 
-    // --- 3. Lógica de Animaciones al Hacer Scroll ---
+    // --- 3. Lógica de Efecto de Escritura (Typing) ---
+    const typingElement = document.getElementById('typing-subtitle');
+    if (typingElement) {
+        const textToType = typingElement.getAttribute('data-text');
+        let index = 0;
+        typingElement.innerHTML = ''; // Limpiar texto base
+        
+        function type() {
+            if (index < textToType.length) {
+                typingElement.innerHTML += textToType.charAt(index);
+                index++;
+                setTimeout(type, 80); // Velocidad de escritura (ms)
+            } else {
+                // Opcional: añadir un cursor parpadeante al final
+                typingElement.innerHTML += '<span class="typing-cursor">|</span>';
+            }
+        }
+        
+        // Iniciar después de las animaciones CSS de entrada (0.8s + 0.5s)
+        // Damos tiempo a que se vean las animaciones de entrada del hero
+        setTimeout(type, 1300);
+    }
+
+
+    // --- 4. Lógica de Animaciones al Hacer Scroll ---
     // Usa IntersectionObserver para animar elementos cuando entran en la vista
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -60,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// --- 4. Eventos de la Lista de Cotejo (usando 'this') ---
+// --- 5. Eventos de la Lista de Cotejo (usando 'this') ---
 // Estas funciones se llaman directamente desde el HTML (onclick, onmouseover, etc.)
 
 /**
@@ -107,6 +131,7 @@ function validateEmail(input) {
     const email = input.value;
     const validationMessage = document.getElementById('validation-message');
     
+    // Simple validación para el ejemplo
     if (email && !email.includes('@')) {
         validationMessage.textContent = 'Por favor, introduce un correo válido.';
         validationMessage.style.color = 'red';
@@ -138,6 +163,9 @@ function handleFormSubmit(event) {
          submitButton.innerHTML = 'Enviar Mensaje';
          submitButton.disabled = false;
          contactForm.reset(); // Limpiar formulario
-         validationMessage.textContent = ''; // Limpiar validación
+         if(validationMessage) {
+            validationMessage.textContent = ''; // Limpiar validación
+         }
     }, 3000);
 }
+

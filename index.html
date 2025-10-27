@@ -106,7 +106,8 @@
             <div class="hero-content animar">
                 <span class="hero-saludo">¡HOLA! MI NOMBRE ES</span>
                 <h1 class="hero-titulo">Alexander Bustamante</h1>
-                <h2 class="hero-subtitulo">Desarrollador Web en Formación</h2>
+                <!-- Este h2 será controlado por script.js para el efecto de escritura -->
+                <h2 class="hero-subtitulo" id="typing-subtitle" data-text="Desarrollador Web en Formación"></h2>
                 <p class="hero-descripcion">
                     Estudiante de Desarrollo de Aplicaciones Web, apasionado por crear interfaces
                     intuitivas y funcionales. Buscando aplicar mis conocimientos en HTML, CSS y JavaScript
@@ -116,7 +117,48 @@
                     <a href="#portafolio" class="btn-principal">Ver mis Proyectos</a>
                     <a href="#sobre-mi" class="btn-secundario">Sobre Mí</a>
                 </div>
+
+                <!-- Logos de Tecnologías (Visible en móvil/tablet) -->
+                <div class="tech-logos-container d-lg-none text-center"> <!-- Oculto en LG y superior -->
+                    <span>Tecnologías Principales:</span>
+                    <div class="tech-logos">
+                        <i class="fa-brands fa-html5" title="HTML5"></i>
+                        <i class="fa-brands fa-css3-alt" title="CSS3"></i>
+                        <i class="fa-brands fa-js" title="JavaScript"></i>
+                        <i class="fa-brands fa-python" title="Python"></i>
+                        <i class="fa-brands fa-bootstrap" title="Bootstrap"></i>
+                        <i class="fa-brands fa-git-alt" title="Git"></i>
+                    </div>
+                </div>
+                <!-- Fin de Logos de Tecnologías (Móvil) -->
+
             </div>
+
+            <!-- Contenedor de Logos Flotantes (Visible en Desktop) -->
+            <div class="tech-orb-container d-none d-lg-block animar" data-delay="1.0"> <!-- Oculto hasta LG -->
+                <div class="tech-orb">
+                    <div class="logo-orb-item" style="--i:1; --color: #E34F26;">
+                        <i class="fa-brands fa-html5" title="HTML5"></i>
+                    </div>
+                    <div class="logo-orb-item" style="--i:2; --color: #1572B6;">
+                        <i class="fa-brands fa-css3-alt" title="CSS3"></i>
+                    </div>
+                    <div class="logo-orb-item" style="--i:3; --color: #F7DF1E;">
+                        <i class="fa-brands fa-js" title="JavaScript"></i>
+                    </div>
+                    <div class="logo-orb-item" style="--i:4; --color: #3776AB;">
+                        <i class="fa-brands fa-python" title="Python"></i>
+                    </div>
+                    <div class="logo-orb-item" style="--i:5; --color: #7952B3;">
+                        <i class="fa-brands fa-bootstrap" title="Bootstrap"></i>
+                    </div>
+                    <div class="logo-orb-item" style="--i:6; --color: #F05032;">
+                        <i class="fa-brands fa-git-alt" title="Git"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin de Logos Flotantes -->
+
         </section>
 
         <!-- ===== SECCIÓN SOBRE MÍ ===== -->
@@ -227,10 +269,11 @@
             <p class="text-center lead text-muted mb-5 animar delay-1">
                 Estos son algunos de los proyectos que he desarrollado durante mi formación.
             </p>
+            <!-- Cuadrícula de proyectos actualizada a 4 columnas en large -->
             <div class="row g-4">
                 
                 <!-- Proyecto 1: Landing Page -->
-                <div class="col-md-6 col-lg-4 animar delay-1">
+                <div class="col-md-6 col-lg-3 animar delay-1">
                     <div class="card-proyecto" 
                          data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/landingPage" 
                          title="Haz clic para ver el repositorio de la Landing Page"
@@ -242,8 +285,7 @@
                         <div class="card-body">
                             <h3 class="card-title">Landing Page Estática</h3>
                             <p class="card-text">
-                                Una página de aterrizaje responsiva para un producto ficticio, 
-                                construida con HTML y CSS puro.
+                                Una página de aterrizaje responsiva construida con HTML y CSS puro.
                             </p>
                             <span class="btn-ver-repo">
                                 Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
@@ -253,7 +295,7 @@
                 </div>
 
                 <!-- Proyecto 2: CRUD -->
-                <div class="col-md-6 col-lg-4 animar delay-2">
+                <div class="col-md-6 col-lg-3 animar delay-2">
                     <div class="card-proyecto" 
                          data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/CRUD%20de%20Clientes" 
                          title="Haz clic para ver el repositorio del CRUD"
@@ -265,8 +307,7 @@
                         <div class="card-body">
                             <h3 class="card-title">Aplicación CRUD de Clientes</h3>
                             <p class="card-text">
-                                Aplicación para Crear, Leer, Actualizar y Borrar registros
-                                (CRUD) usando JavaScript y almacenamiento local.
+                                Aplicación (CRUD) usando JavaScript y almacenamiento local.
                             </p>
                             <span class="btn-ver-repo">
                                 Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
@@ -276,7 +317,7 @@
                 </div>
                 
                 <!-- Proyecto 3: Consumo de API -->
-                <div class="col-md-6 col-lg-4 animar delay-3">
+                <div class="col-md-6 col-lg-3 animar delay-3">
                     <div class="card-proyecto" 
                          data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/Consumo%20de%20API%20Rest" 
                          title="Haz clic para ver el repositorio de Consumo API"
@@ -288,8 +329,29 @@
                         <div class="card-body">
                             <h3 class="card-title">Consumo de API REST</h3>
                             <p class="card-text">
-                                Proyecto que se conecta a una API pública (ej. de películas o clima) 
-                                para mostrar datos de forma dinámica.
+                                Proyecto que se conecta a una API pública para mostrar datos dinámicos.
+                            </p>
+                            <span class="btn-ver-repo">
+                                Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4: Mi_Turno (Añadido) -->
+                <div class="col-md-6 col-lg-3 animar delay-4">
+                    <div class="card-proyecto" 
+                         data-link="https://github.com/maximilianoreyes1/Mi_Turno" 
+                         title="Haz clic para ver el repositorio de Mi_Turno"
+                         onmouseover="handleMouseOver(this)"
+                         onmouseout="handleMouseOut(this)"
+                         onclick="handleClick(this)">
+                        
+                        <img src="https://placehold.co/600x400/5F7D9B/FFFFFF?text=Mi_Turno" alt="Proyecto Mi Turno" class="card-proyecto-img">
+                        <div class="card-body">
+                            <h3 class="card-title">Proyecto "Mi Turno"</h3>
+                            <p class="card-text">
+                                Sistema de gestión de turnos, un proyecto colaborativo más complejo.
                             </p>
                             <span class="btn-ver-repo">
                                 Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
@@ -304,7 +366,7 @@
         <!-- ===== SECCIÓN CONTACTO ===== -->
         <section id="contacto" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Hablemos</h2>
-            <p class="text-center lead text-muted mb-5 animar delay-1">
+            <p class="text-center lead mb-5 animar delay-1">
                 ¿Tienes un proyecto en mente o una pregunta? No dudes en contactarme.
             </p>
             
@@ -350,3 +412,4 @@
 
 </body>
 </html>
+

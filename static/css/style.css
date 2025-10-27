@@ -211,6 +211,8 @@ section {
 #inicio {
     background-color: var(--color-off-white);
     min-height: 100vh;
+    position: relative; /* Añadido para posicionar la órbita de logos */
+    overflow: hidden; /* Evita que la órbita cree scroll horizontal */
 }
 
 .hero-content {
@@ -236,13 +238,42 @@ section {
     font-weight: 500;
     color: var(--color-dark-blue);
     margin-bottom: 1.5rem;
+    min-height: 2.5rem; /* Espacio para el texto de escritura */
 }
 
-.hero-descripcion {
-    font-size: 1.1rem;
-    color: var(--color-dark-blue);
-    margin-bottom: 2rem;
-    line-height: 1.7;
+/* Cursor parpadeante para la animación de escritura */
+.typing-cursor {
+    animation: blink 0.7s infinite;
+    font-weight: 300;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Ocultar hijos de hero hasta que el padre sea visible */
+.hero-content .hero-saludo,
+.hero-content .hero-titulo,
+.hero-content .hero-descripcion,
+.hero-content .hero-botones,
+.hero-content .tech-logos-container { /* Modificado */
+    opacity: 0;
+}
+
+/* Animación escalonada para hijos de hero-content */
+.hero-content.visible .hero-saludo     { animation: fadeInUp 0.5s ease-out 0.2s forwards; }
+.hero-content.visible .hero-titulo     { animation: fadeInUp 0.5s ease-out 0.4s forwards; }
+/* .hero-subtitulo se maneja por JS */
+.hero-content.visible .hero-descripcion { animation: fadeInUp 0.5s ease-out 0.6s forwards; }
+.hero-content.visible .hero-botones    { animation: fadeInUp 0.5s ease-out 0.8s forwards; }
+.hero-content.visible .tech-logos-container { animation: fadeInUp 0.5s ease-out 1.0s forwards; } /* Modificado */
+
+
+/* Keyframe para la animación de entrada */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .btn-principal {
@@ -256,11 +287,23 @@ section {
     border: 2px solid var(--color-medium-blue);
 }
 
+/* Animación de pulso para el botón principal en el hero */
+#inicio .btn-principal {
+    animation: pulse 2s infinite ease-in-out 1.5s;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(95, 125, 155, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(95, 125, 155, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(95, 125, 155, 0); }
+}
+
 .btn-principal:hover {
     background-color: var(--color-dark-blue);
     border-color: var(--color-dark-blue);
     transform: translateY(-3px);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation-play-state: paused; /* Pausar pulso al pasar el cursor */
 }
 
 .btn-secundario {
@@ -280,6 +323,81 @@ section {
     color: var(--color-off-white);
     transform: translateY(-3px);
 }
+
+/* --- CORRECCIÓN: Órbita de Logos (Desktop) --- */
+.tech-orb-container {
+    position: absolute;
+    top: 50%;
+    right: 5%; /* Posicionado a la derecha */
+    transform: translateY(-50%);
+    width: 300px; /* Ancho del contenedor */
+    height: 300px; /* Alto del contenedor */
+}
+
+.tech-orb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: spin 30s linear infinite; /* Animación de rotación lenta */
+}
+
+.logo-orb-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* CORRECCIÓN: Se quitó 'transform-origin: 0 0;'. 
+      El default (50% 50%) es el correcto.
+      También se quitó el 'transform' base, ya que es
+      manejado por el keyframe 0% de la animación 'bob'.
+    */
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    
+    animation: bob 4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.3s);
+}
+
+.logo-orb-item i {
+    font-size: 2.5rem;
+    color: var(--color); /* Asigna el color de la tecnología */
+    transition: var(--main-transition);
+}
+
+.logo-orb-item:hover {
+    /* Ajuste de transform para que el hover no dependa de la rotación padre */
+    transform: translate(-50%, -50%) rotate(calc(var(--i) * (360deg / 6))) translateY(-150px) rotate(calc(var(--i) * -(360deg / 6))) scale(1.1);
+    animation-play-state: paused; /* Pausa la animación 'bob' */
+    z-index: 10;
+}
+.logo-orb-item:hover i {
+    filter: brightness(1.1);
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes bob {
+    /* El keyframe 0% ahora define la posición inicial, 
+      asegurando que los logos comiencen dispersos.
+    */
+    0%, 100% { 
+        transform: translate(-50%, -50%) rotate(calc(var(--i) * (360deg / 6))) translateY(-140px) rotate(calc(var(--i) * -(360deg / 6))); 
+    }
+    50% { 
+        transform: translate(-50%, -50%) rotate(calc(var(--i) * (360deg / 6))) translateY(-150px) rotate(calc(var(--i) * -(360deg / 6))); 
+    }
+}
+/* --- Fin de Órbita de Logos --- */
+
 
 /* Sección: Sobre Mí */
 #sobre-mi {
@@ -303,7 +421,7 @@ section {
 
 /* Sección: Habilidades */
 #habilidades {
-    background-color: var(--color-off-white);
+    background-color: var(--color-light-blue); /* Color de fondo añadido */
 }
 
 .card-habilidad {
@@ -325,6 +443,13 @@ section {
     font-size: 3rem;
     color: var(--color-medium-blue);
     margin-bottom: 1rem;
+    transition: var(--main-transition), transform 0.3s ease-out, color 0.3s ease-out; /* Transición añadida */
+}
+
+/* Animación de icono de habilidad al pasar el cursor */
+.card-habilidad:hover i {
+    transform: scale(1.1) rotate(-5deg);
+    color: var(--color-navy); /* Hacer que resalte */
 }
 
 .card-habilidad h3 {
@@ -394,7 +519,18 @@ section {
     /* Borde para onmouseover de JS */
     border: 3px solid transparent; 
     cursor: pointer;
+    display: flex; /* Añadido para flex layout */
+    flex-direction: column; /* Añadido para flex layout */
+    height: 100%; /* Añadido para igualar altura */
 }
+
+.card-proyecto .card-body {
+    padding: 1.5rem;
+    display: flex; /* Añadido */
+    flex-direction: column; /* Añadido */
+    flex-grow: 1; /* Añadido para empujar botón abajo */
+}
+
 
 /* CSS :hover (Requerido por checklist) */
 .card-proyecto:hover {
@@ -415,10 +551,6 @@ section {
     transform: scale(1.03);
 }
 
-.card-proyecto .card-body {
-    padding: 1.5rem;
-}
-
 .card-proyecto .card-title {
     font-size: 1.25rem;
     font-weight: 600;
@@ -429,6 +561,7 @@ section {
     color: var(--color-dark-blue);
     font-size: 0.95rem;
     margin-bottom: 1rem;
+    flex-grow: 1; /* Añadido para empujar botón abajo */
 }
 
 .card-proyecto .btn-ver-repo {
@@ -440,6 +573,7 @@ section {
     font-weight: 500;
     font-size: 0.9rem;
     transition: var(--main-transition);
+    align-self: flex-start; /* Alinea el botón */
 }
 
 .card-proyecto .btn-ver-repo:hover {
@@ -448,7 +582,25 @@ section {
 
 /* Sección: Contacto */
 #contacto {
-    background-color: #ffffff;
+    background-color: var(--color-dark-blue); /* Color de fondo añadido */
+    color: var(--color-off-white);
+}
+
+/* Estilos de texto y formulario para la sección de contacto oscura */
+#contacto .titulo-seccion {
+    color: var(--color-off-white);
+}
+
+#contacto .titulo-seccion::after {
+    background-color: var(--color-light-blue);
+}
+
+#contacto .lead {
+    color: var(--color-light-blue);
+}
+
+#contacto .form-label {
+    color: var(--color-light-blue);
 }
 
 .form-control {
@@ -464,6 +616,39 @@ section {
     box-shadow: 0 0 0 0.25rem rgba(95, 125, 155, 0.25);
 }
 
+/* Estilos específicos para el formulario de contacto oscuro */
+#contacto .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-light-blue);
+    color: var(--color-off-white);
+}
+
+#contacto .form-control::placeholder {
+    color: var(--color-light-blue);
+}
+
+#contacto .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--color-off-white);
+    box-shadow: 0 0 0 0.25rem rgba(235, 242, 250, 0.25);
+    color: var(--color-off-white);
+}
+
+/* Estilo del botón de envío en la sección de contacto */
+#contacto .btn-principal {
+    background-color: var(--color-off-white);
+    color: var(--color-navy);
+    border-color: var(--color-off-white);
+    font-weight: 600;
+}
+
+#contacto .btn-principal:hover {
+    background-color: var(--color-light-blue);
+    color: var(--color-navy);
+    border-color: var(--color-light-blue);
+}
+
+
 #validation-message {
     font-size: 0.9rem;
     margin-top: 0.5rem;
@@ -472,13 +657,13 @@ section {
 /* --- 5. Animaciones de Scroll --- */
 .animar {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) scale(0.98); /* Efecto de "pop-in" añadido */
     transition: all 0.6s ease-out;
 }
 
 .animar.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1); /* Efecto de "pop-in" añadido */
 }
 
 /* Añadir retrasos para escalonar animaciones */
@@ -489,6 +674,13 @@ section {
 
 
 /* --- 6. Responsividad --- */
+@media (max-width: 1200px) {
+    .tech-orb-container {
+        right: 2%;
+        transform: translateY(-50%) scale(0.9);
+    }
+}
+
 @media (max-width: 992px) {
     /* Colapsar barra lateral en tablet/móvil */
     .sidebar {
@@ -527,6 +719,32 @@ section {
     .hero-titulo { font-size: 2.5rem; }
     .hero-subtitulo { font-size: 1.5rem; }
     .titulo-seccion { font-size: 2rem; }
+
+    /* Estilos para logos en móvil (los que estaban antes en global) */
+    .tech-logos-container {
+        margin-top: 3rem;
+    }
+    .tech-logos-container span {
+        font-size: 0.9rem;
+        color: var(--color-dark-blue);
+        font-weight: 500;
+    }
+    .tech-logos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+    .tech-logos i {
+        font-size: 2.5rem;
+        color: var(--color-medium-blue);
+        transition: var(--main-transition);
+    }
+    .tech-logos i:hover {
+        color: var(--color-navy);
+        transform: scale(1.2);
+    }
 }
 
 @media (max-width: 768px) {
@@ -602,6 +820,15 @@ section {
         padding-top: 60px;
         text-align: center;
     }
+
+    /* Centrar logos en móvil */
+    .tech-logos {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+    .tech-logos i {
+        font-size: 2rem;
+    }
     
     .hero-botones {
         display: flex;
@@ -617,3 +844,4 @@ section {
         margin-top: 2rem;
     }
 }
+
