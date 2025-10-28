@@ -1,6 +1,4 @@
 // --- 0. Ejecutar cuando el DOM esté listo ---
-// Usamos DOMContentLoaded para asegurar que el HTML está cargado
-// antes de intentar seleccionar elementos.
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. Lógica de la Barra Lateral (Sidebar) ---
@@ -15,60 +13,127 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 2. Lógica de Navegación Activa (Scrollspy) ---
-    // Resalta el enlace de la sección visible
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
 
     const activateNavLink = () => {
         let index = sections.length;
-
-        // Recorre las secciones desde abajo hacia arriba
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // 100px de offset
-
-        // Quita la clase 'active' de todos los enlaces
+        while(--index && window.scrollY + 100 < sections[index].offsetTop) {} 
         navLinks.forEach((link) => link.classList.remove('active'));
-        
-        // Añade 'active' solo al enlace correspondiente
         if (navLinks[index]) {
              navLinks[index].classList.add('active');
         }
     };
-
-    // Activar al cargar la página y al hacer scroll
     activateNavLink();
     window.addEventListener('scroll', activateNavLink);
 
-    // --- 3. Lógica de Efecto de Escritura (Typing) ---
-    const typingElement = document.getElementById('typing-subtitle');
-    if (typingElement) {
-        const textToType = typingElement.getAttribute('data-text');
-        let index = 0;
-        typingElement.innerHTML = ''; // Limpiar texto base
-        
-        function type() {
-            if (index < textToType.length) {
-                typingElement.innerHTML += textToType.charAt(index);
-                index++;
-                setTimeout(type, 80); // Velocidad de escritura (ms)
-            } else {
-                // Opcional: añadir un cursor parpadeante al final
-                typingElement.innerHTML += '<span class="typing-cursor">|</span>';
+    // --- 3. Animaciones de Inicio con Anime.js ---
+    // (Reemplaza las animaciones .animar-hero de CSS)
+
+    // Animación de entrada escalonada para el contenido del "hero"
+    const heroTimeline = anime.timeline({
+        easing: 'easeOutExpo',
+        delay: 500 // Empezar después de 500ms
+    });
+    
+    heroTimeline
+    .add({
+        targets: '.hero-saludo',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    })
+    .add({
+        targets: '.hero-titulo',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600') // Empezar 600ms antes de que termine la anterior
+    .add({
+        targets: '.hero-subtitulo', // Contenedor del texto
+        opacity: [0, 1],
+        duration: 500
+    }, '-=600')
+    .add({
+        targets: '.hero-descripcion',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600')
+    .add({
+        targets: '.hero-botones',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600')
+    .add({
+        targets: '.tech-logos-container', // Logos para móvil/tablet
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600')
+    .add({
+        targets: '.tech-static-container', // <--- ACTUALIZADO
+        opacity: [0, 1],
+        scale: [0.8, 1],
+        duration: 1000
+    }, '-=600');
+
+    // Iniciar la animación de escritura *después* de que aparezca su contenedor
+    heroTimeline.finished.then(initTyping);
+
+    // Animación de pulso del botón principal
+    anime({
+        targets: '#inicio .btn-principal',
+        scale: [1, 1.03], // Un pulso más sutil
+        boxShadow: [
+            '0 0 0 0 rgba(95, 125, 155, 0.4)',
+            '0 0 0 12px rgba(95, 125, 155, 0)'
+        ],
+        duration: 2500,
+        easing: 'easeOutExpo',
+        loop: true,
+        delay: 2000 // Empezar después de la intro
+    });
+
+
+    // --- 4. Lógica de Efecto de Escritura (Typing) ---
+    function initTyping() {
+        const typingElement = document.getElementById('typing-subtitle');
+        if (typingElement) {
+            const textToType = typingElement.getAttribute('data-text');
+            let index = 0;
+            typingElement.innerHTML = ''; // Limpiar texto base
+            
+            function type() {
+                if (index < textToType.length) {
+                    typingElement.innerHTML += textToType.charAt(index);
+                    index++;
+                    setTimeout(type, 80); // Velocidad de escritura (ms)
+                } else {
+                    typingElement.innerHTML += '<span class="typing-cursor">|</span>';
+                }
             }
+            type(); // Iniciar la escritura
         }
-        
-        // Iniciar después de las animaciones CSS de entrada (0.8s + 0.5s)
-        // Damos tiempo a que se vean las animaciones de entrada del hero
-        setTimeout(type, 1300);
     }
 
-
-    // --- 4. Lógica de Animaciones al Hacer Scroll ---
-    // Usa IntersectionObserver para animar elementos cuando entran en la vista
+    // --- 5. Lógica de Animaciones al Hacer Scroll (con Anime.js) ---
+    // (Reemplaza la lógica de .animar.visible de CSS)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // Si el elemento está intersectando (visible)
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                // Usar Anime.js en lugar de añadir una clase
+                anime({
+                    targets: entry.target,
+                    translateY: [30, 0],
+                    scale: [0.98, 1],
+                    opacity: [0, 1],
+                    duration: 1000,
+                    easing: 'easeOutExpo',
+                    // Obtener el retraso del 'data-delay' o usar 0
+                    delay: entry.target.dataset.delay || 0
+                });
                 observer.unobserve(entry.target); // Dejar de observar una vez animado
             }
         });
@@ -84,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// --- 5. Eventos de la Lista de Cotejo (usando 'this') ---
-// Estas funciones se llaman directamente desde el HTML (onclick, onmouseover, etc.)
+// --- 6. Eventos de la Lista de Cotejo (usando 'this') ---
+// (Sin cambios)
 
 /**
  * Item 10: Evento onclick en las tarjetas de proyecto.

@@ -177,8 +177,8 @@ body {
 }
 
 section {
-    /* Padding estándar para secciones */
-    padding: 100px 5%;
+    /* Padding estándar para secciones - AJUSTADO */
+    padding: 100px 0%; /* Aumentado de 5% a 8% */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -219,6 +219,11 @@ section {
     max-width: 700px;
 }
 
+/* Ocultar elementos del hero para que Anime.js los revele */
+.animar-hero {
+    opacity: 0;
+}
+
 .hero-saludo {
     color: var(--color-medium-blue);
     font-weight: 600;
@@ -252,30 +257,6 @@ section {
     50% { opacity: 0; }
 }
 
-/* Ocultar hijos de hero hasta que el padre sea visible */
-.hero-content .hero-saludo,
-.hero-content .hero-titulo,
-.hero-content .hero-descripcion,
-.hero-content .hero-botones,
-.hero-content .tech-logos-container { /* Modificado */
-    opacity: 0;
-}
-
-/* Animación escalonada para hijos de hero-content */
-.hero-content.visible .hero-saludo     { animation: fadeInUp 0.5s ease-out 0.2s forwards; }
-.hero-content.visible .hero-titulo     { animation: fadeInUp 0.5s ease-out 0.4s forwards; }
-/* .hero-subtitulo se maneja por JS */
-.hero-content.visible .hero-descripcion { animation: fadeInUp 0.5s ease-out 0.6s forwards; }
-.hero-content.visible .hero-botones    { animation: fadeInUp 0.5s ease-out 0.8s forwards; }
-.hero-content.visible .tech-logos-container { animation: fadeInUp 0.5s ease-out 1.0s forwards; } /* Modificado */
-
-
-/* Keyframe para la animación de entrada */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 .btn-principal {
     background-color: var(--color-medium-blue);
     color: var(--color-off-white);
@@ -287,23 +268,11 @@ section {
     border: 2px solid var(--color-medium-blue);
 }
 
-/* Animación de pulso para el botón principal en el hero */
-#inicio .btn-principal {
-    animation: pulse 2s infinite ease-in-out 1.5s;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(95, 125, 155, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(95, 125, 155, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(95, 125, 155, 0); }
-}
-
 .btn-principal:hover {
     background-color: var(--color-dark-blue);
     border-color: var(--color-dark-blue);
     transform: translateY(-3px);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    animation-play-state: paused; /* Pausar pulso al pasar el cursor */
 }
 
 .btn-secundario {
@@ -324,79 +293,75 @@ section {
     transform: translateY(-3px);
 }
 
-/* --- CORRECCIÓN: Órbita de Logos (Desktop) --- */
-.tech-orb-container {
+/* --- INICIO: Logos Estáticos (Desktop) --- */
+.tech-static-container {
     position: absolute;
-    top: 50%;
-    right: 5%; /* Posicionado a la derecha */
+    top: 40%; /* AJUSTADO - Subido de 45% a 40% */
+    right: 5%;
     transform: translateY(-50%);
-    width: 300px; /* Ancho del contenedor */
-    height: 300px; /* Alto del contenedor */
-}
-
-.tech-orb {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    animation: spin 30s linear infinite; /* Animación de rotación lenta */
-}
-
-.logo-orb-item {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* CORRECCIÓN: Se quitó 'transform-origin: 0 0;'. 
-      El default (50% 50%) es el correcto.
-      También se quitó el 'transform' base, ya que es
-      manejado por el keyframe 0% de la animación 'bob'.
-    */
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    
-    animation: bob 4s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.3s);
-}
-
-.logo-orb-item i {
-    font-size: 2.5rem;
-    color: var(--color); /* Asigna el color de la tecnología */
-    transition: var(--main-transition);
-}
-
-.logo-orb-item:hover {
-    /* Ajuste de transform para que el hover no dependa de la rotación padre */
-    transform: translate(-50%, -50%) rotate(calc(var(--i) * (360deg / 6))) translateY(-150px) rotate(calc(var(--i) * -(360deg / 6))) scale(1.1);
-    animation-play-state: paused; /* Pausa la animación 'bob' */
+    gap: 1rem; /* Espacio entre items */
     z-index: 10;
 }
-.logo-orb-item:hover i {
-    filter: brightness(1.1);
+
+.tech-static-item {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: var(--main-transition);
+    text-decoration: none;
+    overflow: hidden; /* Oculta el texto */
+    width: 60px; /* Ancho colapsado */
+    cursor: pointer;
 }
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.tech-static-item i {
+    font-size: 2.2rem;
+    color: var(--color);
+    transition: var(--main-transition);
+    min-width: 35px; /* Para alinear */
 }
 
-@keyframes bob {
-    /* El keyframe 0% ahora define la posición inicial, 
-      asegurando que los logos comiencen dispersos.
-    */
-    0%, 100% { 
-        transform: translate(-50%, -50%) rotate(calc(var(--i) * (360deg / 6))) translateY(-140px) rotate(calc(var(--i) * -(360deg / 6))); 
-    }
-    50% { 
-        transform: translate(-50%, -50%) rotate(calc(var(--i) * (360deg / 6))) translateY(-150px) rotate(calc(var(--i) * -(360deg / 6))); 
-    }
+/* Contenedor para el texto (nombre y nivel) */
+.tech-static-item .tech-static-text {
+    display: flex;
+    flex-direction: column; /* Pone el nivel debajo del nombre */
+    margin-left: 0.75rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--main-transition);
+    white-space: nowrap;
 }
-/* --- Fin de Órbita de Logos --- */
+
+/* Estilo para el nombre de la tecnología */
+.tech-static-item .tech-static-text span {
+    font-weight: 600; /* Más grueso */
+    color: var(--color-navy);
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+/* Estilo para el nivel de habilidad */
+.tech-static-item .tech-static-text small {
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--color-dark-blue);
+}
+
+
+.tech-static-item:hover {
+    transform: scale(1.05) translateX(-10px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    width: 200px; /* Ancho expandido para mostrar texto */
+}
+
+.tech-static-item:hover .tech-static-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+/* --- Fin de Logos Estáticos --- */
 
 
 /* Sección: Sobre Mí */
@@ -408,6 +373,7 @@ section {
     line-height: 1.8;
     font-size: 1.1rem;
     color: var(--color-dark-blue);
+    text-align: justify;
 }
 
 .sobre-mi-foto {
@@ -419,7 +385,7 @@ section {
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* Sección: Habilidades */
+/* Sección: Habilidades (Blandas) */
 #habilidades {
     background-color: var(--color-light-blue); /* Color de fondo añadido */
 }
@@ -459,14 +425,8 @@ section {
     margin-bottom: 0.5rem;
 }
 
-.card-habilidad p {
-    font-size: 0.9rem;
-    color: var(--color-dark-blue);
-    background-color: var(--color-light-blue);
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-}
+/* Estilo para <p> de nivel eliminado */
+
 
 /* Sección: Educación */
 #educacion {
@@ -656,28 +616,20 @@ section {
 
 /* --- 5. Animaciones de Scroll --- */
 .animar {
-    opacity: 0;
-    transform: translateY(30px) scale(0.98); /* Efecto de "pop-in" añadido */
-    transition: all 0.6s ease-out;
+    opacity: 0; /* Ocultar para que Anime.js lo revele */
+    /* Las transformaciones y transiciones ahora son manejadas por Anime.js */
 }
-
-.animar.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1); /* Efecto de "pop-in" añadido */
-}
-
-/* Añadir retrasos para escalonar animaciones */
-.animar.delay-1 { transition-delay: 0.1s; }
-.animar.delay-2 { transition-delay: 0.2s; }
-.animar.delay-3 { transition-delay: 0.3s; }
-.animar.delay-4 { transition-delay: 0.4s; }
-
 
 /* --- 6. Responsividad --- */
 @media (max-width: 1200px) {
-    .tech-orb-container {
+    /* Ajuste para el nuevo panel estático */
+    .tech-static-container {
         right: 2%;
         transform: translateY(-50%) scale(0.9);
+    }
+
+    section {
+        padding: 100px 6%; /* Ajuste intermedio */
     }
 }
 
@@ -812,7 +764,7 @@ section {
     
     section {
         min-height: auto; /* Altura auto en móvil */
-        padding: 60px 5%;
+        padding: 60px 5%; /* Padding original de 5% para móvil */
     }
     
     /* La primera sección (inicio) necesita padding-bottom extra */

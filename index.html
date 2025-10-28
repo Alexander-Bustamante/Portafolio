@@ -103,23 +103,24 @@
 
         <!-- ===== SECCIÓN INICIO ===== -->
         <section id="inicio" class="container-fluid">
-            <div class="hero-content animar">
-                <span class="hero-saludo">¡HOLA! MI NOMBRE ES</span>
-                <h1 class="hero-titulo">Alexander Bustamante</h1>
+            <!-- Contenedor para elementos animados por Anime.js -->
+            <div class="hero-content">
+                <span class="hero-saludo animar-hero">¡HOLA! MI NOMBRE ES</span>
+                <h1 class="hero-titulo animar-hero">Alexander Bustamante</h1>
                 <!-- Este h2 será controlado por script.js para el efecto de escritura -->
-                <h2 class="hero-subtitulo" id="typing-subtitle" data-text="Desarrollador Web en Formación"></h2>
-                <p class="hero-descripcion">
+                <h2 class="hero-subtitulo animar-hero" id="typing-subtitle" data-text="Desarrollador Web en Formación"></h2>
+                <p class="hero-descripcion animar-hero">
                     Estudiante de Desarrollo de Aplicaciones Web, apasionado por crear interfaces
                     intuitivas y funcionales. Buscando aplicar mis conocimientos en HTML, CSS y JavaScript
                     en proyectos desafiantes.
                 </p>
-                <div class="hero-botones">
+                <div class="hero-botones animar-hero">
                     <a href="#portafolio" class="btn-principal">Ver mis Proyectos</a>
                     <a href="#sobre-mi" class="btn-secundario">Sobre Mí</a>
                 </div>
 
                 <!-- Logos de Tecnologías (Visible en móvil/tablet) -->
-                <div class="tech-logos-container d-lg-none text-center"> <!-- Oculto en LG y superior -->
+                <div class="tech-logos-container d-lg-none text-center animar-hero"> <!-- Oculto en LG y superior -->
                     <span>Tecnologías Principales:</span>
                     <div class="tech-logos">
                         <i class="fa-brands fa-html5" title="HTML5"></i>
@@ -134,37 +135,60 @@
 
             </div>
 
-            <!-- Contenedor de Logos Flotantes (Visible en Desktop) -->
-            <div class="tech-orb-container d-none d-lg-block animar" data-delay="1.0"> <!-- Oculto hasta LG -->
-                <div class="tech-orb">
-                    <div class="logo-orb-item" style="--i:1; --color: #E34F26;">
-                        <i class="fa-brands fa-html5" title="HTML5"></i>
+            <!-- Contenedor de Logos Estáticos (Visible en Desktop) -->
+            <div class="tech-static-container d-none d-lg-flex flex-column animar-hero">
+                <div class="tech-static-item" style="--color: #E34F26;" title="HTML5 - Intermedio">
+                    <i class="fa-brands fa-html5"></i>
+                    <div class="tech-static-text">
+                        <span>HTML5</span>
+                        <small>Intermedio</small>
                     </div>
-                    <div class="logo-orb-item" style="--i:2; --color: #1572B6;">
-                        <i class="fa-brands fa-css3-alt" title="CSS3"></i>
+                </div>
+                <div class="tech-static-item" style="--color: #1572B6;" title="CSS3 - Intermedio">
+                    <i class="fa-brands fa-css3-alt"></i>
+                    <div class="tech-static-text">
+                        <span>CSS3</span>
+                        <small>Intermedio</small>
                     </div>
-                    <div class="logo-orb-item" style="--i:3; --color: #F7DF1E;">
-                        <i class="fa-brands fa-js" title="JavaScript"></i>
+                </div>
+                <div class="tech-static-item" style="--color: #F7DF1E;" title="JavaScript - Básico">
+                    <i class="fa-brands fa-js"></i>
+                    <div class="tech-static-text">
+                        <span>JavaScript</span>
+                        <small>Básico</small>
                     </div>
-                    <div class="logo-orb-item" style="--i:4; --color: #3776AB;">
-                        <i class="fa-brands fa-python" title="Python"></i>
+                </div>
+                <div class="tech-static-item" style="--color: #3776AB;" title="Python - Básico">
+                    <i class="fa-brands fa-python"></i>
+                    <div class="tech-static-text">
+                        <span>Python</span>
+                        <small>Básico</small>
                     </div>
-                    <div class="logo-orb-item" style="--i:5; --color: #7952B3;">
-                        <i class="fa-brands fa-bootstrap" title="Bootstrap"></i>
+                </div>
+                <div class="tech-static-item" style="--color: #7952B3;" title="Bootstrap - Intermedio">
+                    <i class="fa-brands fa-bootstrap"></i>
+                    <div class="tech-static-text">
+                        <span>Bootstrap</span>
+                        <small>Intermedio</small>
                     </div>
-                    <div class="logo-orb-item" style="--i:6; --color: #F05032;">
-                        <i class="fa-brands fa-git-alt" title="Git"></i>
+                </div>
+                <div class="tech-static-item" style="--color: #F05032;" title="Git - Intermedio">
+                    <i class="fa-brands fa-git-alt"></i>
+                    <div class="tech-static-text">
+                        <span>Git</span>
+                        <small>Intermedio</small>
                     </div>
                 </div>
             </div>
-            <!-- Fin de Logos Flotantes -->
+            <!-- Fin de Logos Estáticos -->
+
 
         </section>
 
         <!-- ===== SECCIÓN SOBRE MÍ ===== -->
         <section id="sobre-mi" class="container-fluid">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6 animar delay-1">
+                <div class="col-lg-6 animar">
                     <h2 class="titulo-seccion">Sobre Mí</h2>
                     <p class="sobre-mi-texto">
                         Soy un estudiante entusiasta del Liceo Comercial Vate Vicente Huidobro, cursando la
@@ -182,63 +206,43 @@
                         con diferentes diseños web.
                     </p>
                 </div>
-                <div class="col-lg-6 text-center text-lg-end animar delay-2">
-                    <img src="https://placehold.co/400x450/3B536D/EBF2FA?text=Alex+B." alt="Foto de Alexander Bustamante" class="sobre-mi-foto img-fluid">
+                <div class="col-lg-6 text-center text-lg-end animar" data-delay="100">
+                    <img src="static/resource/img/gato_pensando.png" alt="Foto de Alexander Bustamante" class="sobre-mi-foto img-fluid">
                 </div>
             </div>
         </section>
 
-        <!-- ===== SECCIÓN HABILIDADES ===== -->
+        <!-- ===== SECCIÓN HABILIDADES BLANDAS ===== -->
         <section id="habilidades" class="container-fluid">
-            <h2 class="titulo-seccion text-center mx-auto animar">Mis Habilidades</h2>
+            <h2 class="titulo-seccion text-center mx-auto animar">Habilidades Blandas</h2>
             <div class="row g-4 justify-content-center">
                 
                 <!-- Habilidad 1 -->
-                <div class="col-md-4 col-lg-3 animar delay-1">
+                <div class="col-md-4 col-lg-3 animar" data-delay="0">
                     <div class="card-habilidad">
-                        <i class="fa-brands fa-html5"></i>
-                        <h3>HTML5</h3>
-                        <p>Intermedio</p>
+                        <i class="fa-solid fa-users"></i>
+                        <h3>Trabajo en Equipo</h3>
                     </div>
                 </div>
                 <!-- Habilidad 2 -->
-                <div class="col-md-4 col-lg-3 animar delay-2">
+                <div class="col-md-4 col-lg-3 animar" data-delay="100">
                     <div class="card-habilidad">
-                        <i class="fa-brands fa-css3-alt"></i>
-                        <h3>CSS3</h3>
-                        <p>Intermedio</p>
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <h3>Adaptabilidad</h3>
                     </div>
                 </div>
                 <!-- Habilidad 3 -->
-                <div class="col-md-4 col-lg-3 animar delay-3">
+                <div class="col-md-4 col-lg-3 animar" data-delay="200">
                     <div class="card-habilidad">
-                        <i class="fa-brands fa-js"></i>
-                        <h3>JavaScript</h3>
-                        <p>Básico</p>
+                        <i class="fa-solid fa-brain"></i>
+                        <h3>Resolución de Problemas</h3>
                     </div>
                 </div>
                 <!-- Habilidad 4 -->
-                <div class="col-md-4 col-lg-3 animar delay-4">
+                <div class="col-md-4 col-lg-3 animar" data-delay="300">
                     <div class="card-habilidad">
-                        <i class="fa-brands fa-python"></i>
-                        <h3>Python</h3>
-                        <p>Básico</p>
-                    </div>
-                </div>
-                 <!-- Habilidad 5 -->
-                 <div class="col-md-4 col-lg-3 animar delay-1">
-                    <div class="card-habilidad">
-                        <i class="fa-brands fa-bootstrap"></i>
-                        <h3>Bootstrap</h3>
-                        <p>Intermedio</p>
-                    </div>
-                </div>
-                 <!-- Habilidad 6 -->
-                 <div class="col-md-4 col-lg-3 animar delay-2">
-                    <div class="card-habilidad">
-                        <i class="fa-brands fa-git-alt"></i>
-                        <h3>Git & GitHub</h3>
-                        <p>Intermedio</p>
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <h3>Creatividad</h3>
                     </div>
                 </div>
                 
@@ -249,7 +253,7 @@
         <section id="educacion" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Formación Académica</h2>
             <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-8 animar delay-1">
+                <div class="col-md-10 col-lg-8 animar" data-delay="100">
                     <div class="card-educacion">
                         <i class="fa-solid fa-school"></i>
                         <div>
@@ -266,14 +270,14 @@
         <!-- ===== SECCIÓN PORTAFOLIO ===== -->
         <section id="portafolio" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Mis Proyectos</h2>
-            <p class="text-center lead text-muted mb-5 animar delay-1">
+            <p class="text-center lead text-muted mb-5 animar" data-delay="100">
                 Estos son algunos de los proyectos que he desarrollado durante mi formación.
             </p>
             <!-- Cuadrícula de proyectos actualizada a 4 columnas en large -->
             <div class="row g-4">
                 
                 <!-- Proyecto 1: Landing Page -->
-                <div class="col-md-6 col-lg-3 animar delay-1">
+                <div class="col-md-6 col-lg-3 animar" data-delay="0">
                     <div class="card-proyecto" 
                          data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/landingPage" 
                          title="Haz clic para ver el repositorio de la Landing Page"
@@ -295,7 +299,7 @@
                 </div>
 
                 <!-- Proyecto 2: CRUD -->
-                <div class="col-md-6 col-lg-3 animar delay-2">
+                <div class="col-md-6 col-lg-3 animar" data-delay="100">
                     <div class="card-proyecto" 
                          data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/CRUD%20de%20Clientes" 
                          title="Haz clic para ver el repositorio del CRUD"
@@ -317,7 +321,7 @@
                 </div>
                 
                 <!-- Proyecto 3: Consumo de API -->
-                <div class="col-md-6 col-lg-3 animar delay-3">
+                <div class="col-md-6 col-lg-3 animar" data-delay="200">
                     <div class="card-proyecto" 
                          data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/Consumo%20de%20API%20Rest" 
                          title="Haz clic para ver el repositorio de Consumo API"
@@ -339,7 +343,7 @@
                 </div>
 
                 <!-- Proyecto 4: Mi_Turno (Añadido) -->
-                <div class="col-md-6 col-lg-3 animar delay-4">
+                <div class="col-md-6 col-lg-3 animar" data-delay="300">
                     <div class="card-proyecto" 
                          data-link="https://github.com/maximilianoreyes1/Mi_Turno" 
                          title="Haz clic para ver el repositorio de Mi_Turno"
@@ -366,12 +370,12 @@
         <!-- ===== SECCIÓN CONTACTO ===== -->
         <section id="contacto" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Hablemos</h2>
-            <p class="text-center lead mb-5 animar delay-1">
+            <p class="text-center lead mb-5 animar" data-delay="100">
                 ¿Tienes un proyecto en mente o una pregunta? No dudes en contactarme.
             </p>
             
             <div class="row justify-content-center">
-                <div class="col-lg-8 animar delay-2">
+                <div class="col-lg-8 animar" data-delay="200">
                     <form id="contact-form" action="#" method="POST" onsubmit="handleFormSubmit(event)">
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -406,6 +410,9 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Librería Anime.js (Añadida) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
     <!-- Mi Script Personalizado -->
     <script src="static/js/script.js" defer></script>
