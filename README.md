@@ -44,6 +44,8 @@ Portafolio/
 
 ├── README.md # Documentación del proyecto
 
+├── .gitignore # Ignora archivos que afecten al funcionamiento de la pagina
+
 └── static/
 
 ├── css/
@@ -66,9 +68,7 @@ Este es un proyecto personal y actualmente no acepta contribuciones externas. Si
 
 - Añadir sección de blog para compartir artículos y experiencias
 - Implementar un sistema de contacto con formulario funcional
-- Mejorar accesibilidad con auditorías ARIA
 - Optimizar tiempos de carga y desempeño
-- Integrar frameworks modernos (React, Vue) en futuras versiones
 
 ## Contacto
 

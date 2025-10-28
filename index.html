@@ -5,124 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alexander Bustamante - Desarrollador Web</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome (para iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Google Font (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Mi Hoja de Estilos Personalizada -->
     <link rel="stylesheet" href="static/css/style.css">
 
 </head>
 <body>
 
-    <!-- =================================== -->
-    <!--     BARRA DE NAVEGACIÓN LATERAL     -->
-    <!-- =================================== -->
-    <nav class="sidebar collapsed" id="sidebar">
-        <!-- Encabezado con Logo y Toggle -->
-        <div class="sidebar-header">
-            <a href="#inicio" class="sidebar-logo">
+    <nav class="barra-lateral colapsado" id="barra-lateral">
+        <div class="encabezado-barra-lateral">
+            <a href="#inicio" class="logo-barra-lateral">
                 <i class="fa-solid fa-code logo-icono"></i>
-                <span class="nav-link-text">A. Bustamante</span>
+                <span class="texto-enlace-nav">A. Bustamante</span>
             </a>
-            <button id="sidebar-toggle">
+            <button id="interruptor-barra-lateral">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
         </div>
 
-        <!-- Enlaces de Navegación -->
-        <ul class="sidebar-nav">
-            <li class="nav-item">
-                <a href="#inicio" class="nav-link active" aria-label="Inicio">
+        <ul class="nav-barra-lateral">
+            <li class="item-nav">
+                <a href="#inicio" class="enlace-nav activo" aria-label="Inicio">
                     <i class="fa-solid fa-house"></i>
-                    <span class="nav-link-text">Inicio</span>
+                    <span class="texto-enlace-nav">Inicio</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#sobre-mi" class="nav-link" aria-label="Sobre Mí">
+            <li class="item-nav">
+                <a href="#sobre-mi" class="enlace-nav" aria-label="Sobre Mí">
                     <i class="fa-solid fa-user"></i>
-                    <span class="nav-link-text">Sobre Mí</span>
+                    <span class="texto-enlace-nav">Sobre Mí</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#habilidades" class="nav-link" aria-label="Habilidades">
+            <li class="item-nav">
+                <a href="#habilidades" class="enlace-nav" aria-label="Habilidades">
                     <i class="fa-solid fa-laptop-code"></i>
-                    <span class="nav-link-text">Habilidades</span>
+                    <span class="texto-enlace-nav">Habilidades</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#educacion" class="nav-link" aria-label="Educación">
+            <li class="item-nav">
+                <a href="#educacion" class="enlace-nav" aria-label="Educación">
                     <i class="fa-solid fa-graduation-cap"></i>
-                    <span class="nav-link-text">Educación</span>
+                    <span class="texto-enlace-nav">Educación</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#portafolio" class="nav-link" aria-label="Portafolio">
+            <li class="item-nav">
+                <a href="#portafolio" class="enlace-nav" aria-label="Portafolio">
                     <i class="fa-solid fa-briefcase"></i>
-                    <span class="nav-link-text">Portafolio</span>
+                    <span class="texto-enlace-nav">Portafolio</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#contacto" class="nav-link" aria-label="Contacto">
+            <li class="item-nav">
+                <a href="#contacto" class="enlace-nav" aria-label="Contacto">
                     <i class="fa-solid fa-envelope"></i>
-                    <span class="nav-link-text">Contacto</span>
+                    <span class="texto-enlace-nav">Contacto</span>
                 </a>
             </li>
         </ul>
 
-        <!-- Footer (Redes Sociales) -->
-        <div class="sidebar-footer">
-            <ul class="sidebar-nav">
-                <li class="nav-item">
-                    <a href="https://github.com/Alexander-Bustamante" target="_blank" class="nav-link" aria-label="GitHub">
+        <div class="pie-barra-lateral">
+            <ul class="nav-barra-lateral">
+                <li class="item-nav">
+                    <a href="https://github.com/Alexander-Bustamante" target="_blank" class="enlace-nav" aria-label="GitHub">
                         <i class="fa-brands fa-github"></i>
-                        <span class="nav-link-text">GitHub</span>
+                        <span class="texto-enlace-nav">GitHub</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" aria-label="LinkedIn">
+                <li class="item-nav">
+                    <a href="#" class="enlace-nav" aria-label="LinkedIn">
                         <i class="fa-brands fa-linkedin"></i>
-                        <span class="nav-link-text">LinkedIn</span>
+                        <span class="texto-enlace-nav">LinkedIn</span>
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <!-- =================================== -->
-    <!--         CONTENIDO PRINCIPAL         -->
-    <!-- =================================== -->
-    <main id="main-content">
+    <main id="contenido-principal">
 
-        <!-- ===== SECCIÓN INICIO ===== -->
         <section id="inicio" class="container-fluid">
-            <!-- Contenedor para elementos animados por Anime.js -->
-            <div class="hero-content">
-                <span class="hero-saludo animar-hero">¡HOLA! MI NOMBRE ES</span>
-                <h1 class="hero-titulo animar-hero">Alexander Bustamante</h1>
-                <!-- Este h2 será controlado por script.js para el efecto de escritura -->
-                <h2 class="hero-subtitulo animar-hero" id="typing-subtitle" data-text="Desarrollador Web en Formación"></h2>
-                <p class="hero-descripcion animar-hero">
+            <div class="contenido-hero">
+                <span class="saludo-hero animar-hero">¡HOLA! MI NOMBRE ES</span>
+                <h1 class="titulo-hero animar-hero">Alexander Bustamante</h1>
+                <h2 class="subtitulo-hero animar-hero" id="subtitulo-escribiendo" data-text="Desarrollador Web en Formación"></h2>
+                <p class="descripcion-hero animar-hero">
                     Estudiante de Desarrollo de Aplicaciones Web, apasionado por crear interfaces
                     intuitivas y funcionales. Buscando aplicar mis conocimientos en HTML, CSS y JavaScript
                     en proyectos desafiantes.
                 </p>
-                <div class="hero-botones animar-hero">
+                <div class="botones-hero animar-hero">
                     <a href="#portafolio" class="btn-principal">Ver mis Proyectos</a>
                     <a href="#sobre-mi" class="btn-secundario">Sobre Mí</a>
                 </div>
 
-                <!-- Logos de Tecnologías (Visible en móvil/tablet) -->
-                <div class="tech-logos-container d-lg-none text-center animar-hero"> <!-- Oculto en LG y superior -->
+                <div class="contenedor-logos-tech d-lg-none text-center animar-hero"> 
                     <span>Tecnologías Principales:</span>
-                    <div class="tech-logos">
+                    <div class="logos-tech">
                         <i class="fa-brands fa-html5" title="HTML5"></i>
                         <i class="fa-brands fa-css3-alt" title="CSS3"></i>
                         <i class="fa-brands fa-js" title="JavaScript"></i>
@@ -131,116 +114,106 @@
                         <i class="fa-brands fa-git-alt" title="Git"></i>
                     </div>
                 </div>
-                <!-- Fin de Logos de Tecnologías (Móvil) -->
 
             </div>
 
-            <!-- Contenedor de Logos Estáticos (Visible en Desktop) -->
-            <div class="tech-static-container d-none d-lg-flex flex-column animar-hero">
-                <div class="tech-static-item" style="--color: #E34F26;" title="HTML5 - Intermedio">
+            <div class="contenedor-estatico-tech d-none d-lg-flex flex-column animar-hero">
+                <div class="item-estatico-tech" style="--color: #E34F26;" title="HTML5 - Intermedio">
                     <i class="fa-brands fa-html5"></i>
-                    <div class="tech-static-text">
+                    <div class="texto-estatico-tech">
                         <span>HTML5</span>
                         <small>Intermedio</small>
                     </div>
                 </div>
-                <div class="tech-static-item" style="--color: #1572B6;" title="CSS3 - Intermedio">
+                <div class="item-estatico-tech" style="--color: #1572B6;" title="CSS3 - Intermedio">
                     <i class="fa-brands fa-css3-alt"></i>
-                    <div class="tech-static-text">
+                    <div class="texto-estatico-tech">
                         <span>CSS3</span>
                         <small>Intermedio</small>
                     </div>
                 </div>
-                <div class="tech-static-item" style="--color: #F7DF1E;" title="JavaScript - Básico">
+                <div class="item-estatico-tech" style="--color: #F7DF1E;" title="JavaScript - Básico">
                     <i class="fa-brands fa-js"></i>
-                    <div class="tech-static-text">
+                    <div class="texto-estatico-tech">
                         <span>JavaScript</span>
                         <small>Básico</small>
                     </div>
                 </div>
-                <div class="tech-static-item" style="--color: #3776AB;" title="Python - Básico">
+                <div class="item-estatico-tech" style="--color: #3776AB;" title="Python - Básico">
                     <i class="fa-brands fa-python"></i>
-                    <div class="tech-static-text">
+                    <div class="texto-estatico-tech">
                         <span>Python</span>
                         <small>Básico</small>
                     </div>
                 </div>
-                <div class="tech-static-item" style="--color: #7952B3;" title="Bootstrap - Intermedio">
+                <div class="item-estatico-tech" style="--color: #7952B3;" title="Bootstrap - Intermedio">
                     <i class="fa-brands fa-bootstrap"></i>
-                    <div class="tech-static-text">
+                    <div class="texto-estatico-tech">
                         <span>Bootstrap</span>
                         <small>Intermedio</small>
                     </div>
                 </div>
-                <div class="tech-static-item" style="--color: #F05032;" title="Git - Intermedio">
+                <div class="item-estatico-tech" style="--color: #F05032;" title="Git - Intermedio">
                     <i class="fa-brands fa-git-alt"></i>
-                    <div class="tech-static-text">
+                    <div class="texto-estatico-tech">
                         <span>Git</span>
                         <small>Intermedio</small>
                     </div>
                 </div>
             </div>
-            <!-- Fin de Logos Estáticos -->
-
 
         </section>
 
-        <!-- ===== SECCIÓN SOBRE MÍ ===== -->
         <section id="sobre-mi" class="container-fluid">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 animar">
                     <h2 class="titulo-seccion">Sobre Mí</h2>
-                    <p class="sobre-mi-texto">
+                    <p class="texto-sobre-mi">
                         Soy un estudiante entusiasta del Liceo Comercial Vate Vicente Huidobro, cursando la
                         especialidad de Desarrollo de Aplicaciones Web. Mi fascinación por la tecnología 
                         comenzó desde joven y ahora estoy canalizando esa pasión en aprender a construir 
-                        sitios y aplicaciones web.
+                        aplicaciones web, softwares y diversas soluciones tecnologicas.
                     </p>
-                    <p class="sobre-mi-texto mt-3">
+                    <p class="texto-sobre-mi mt-3">
                         Tengo una base sólida en <strong>HTML y CSS</strong>, y actualmente estoy mejorando mis habilidades 
                         en <strong>JavaScript</strong> y <strong>Python</strong>. Disfruto resolviendo problemas y aprendiendo 
                         constantemente sobre nuevas herramientas y frameworks como Bootstrap y Git.
                     </p>
-                    <p class="sobre-mi-texto mt-3">
+                    <p class="texto-sobre-mi mt-3">
                         En mi tiempo libre, me gusta explorar nuevos proyectos en GitHub y experimentar 
-                        con diferentes diseños web.
+                        con diferentes tecnologias nuevas.
                     </p>
                 </div>
                 <div class="col-lg-6 text-center text-lg-end animar" data-delay="100">
-                    <img src="static/resource/img/gato_pensando.png" alt="Foto de Alexander Bustamante" class="sobre-mi-foto img-fluid">
+                    <img src="static/resource/img/gato_pensando.png" alt="Foto de Alexander Bustamante" class="foto-sobre-mi img-fluid">
                 </div>
             </div>
         </section>
 
-        <!-- ===== SECCIÓN HABILIDADES BLANDAS ===== -->
         <section id="habilidades" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Habilidades Blandas</h2>
             <div class="row g-4 justify-content-center">
                 
-                <!-- Habilidad 1 -->
                 <div class="col-md-4 col-lg-3 animar" data-delay="0">
-                    <div class="card-habilidad">
+                    <div class="tarjeta-habilidad">
                         <i class="fa-solid fa-users"></i>
                         <h3>Trabajo en Equipo</h3>
                     </div>
                 </div>
-                <!-- Habilidad 2 -->
                 <div class="col-md-4 col-lg-3 animar" data-delay="100">
-                    <div class="card-habilidad">
+                    <div class="tarjeta-habilidad">
                         <i class="fa-solid fa-arrows-rotate"></i>
                         <h3>Adaptabilidad</h3>
                     </div>
                 </div>
-                <!-- Habilidad 3 -->
                 <div class="col-md-4 col-lg-3 animar" data-delay="200">
-                    <div class="card-habilidad">
+                    <div class="tarjeta-habilidad">
                         <i class="fa-solid fa-brain"></i>
                         <h3>Resolución de Problemas</h3>
                     </div>
                 </div>
-                <!-- Habilidad 4 -->
                 <div class="col-md-4 col-lg-3 animar" data-delay="300">
-                    <div class="card-habilidad">
+                    <div class="tarjeta-habilidad">
                         <i class="fa-solid fa-lightbulb"></i>
                         <h3>Creatividad</h3>
                     </div>
@@ -249,12 +222,11 @@
             </div>
         </section>
 
-        <!-- ===== SECCIÓN EDUCACIÓN ===== -->
         <section id="educacion" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Formación Académica</h2>
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8 animar" data-delay="100">
-                    <div class="card-educacion">
+                    <div class="tarjeta-educacion">
                         <i class="fa-solid fa-school"></i>
                         <div>
                             <h3>Liceo Comercial Vate Vicente Huidobro</h3>
@@ -267,29 +239,27 @@
         </section>
 
 
-        <!-- ===== SECCIÓN PORTAFOLIO ===== -->
         <section id="portafolio" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Mis Proyectos</h2>
             <p class="text-center lead text-muted mb-5 animar" data-delay="100">
                 Estos son algunos de los proyectos que he desarrollado durante mi formación.
             </p>
-            <!-- Cuadrícula de proyectos actualizada a 4 columnas en large -->
             <div class="row g-4">
                 
-                <!-- Proyecto 1: Landing Page -->
                 <div class="col-md-6 col-lg-3 animar" data-delay="0">
-                    <div class="card-proyecto" 
-                         data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/landingPage" 
+                    <div class="tarjeta-proyecto" 
+                         data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/23_like_part2" 
                          title="Haz clic para ver el repositorio de la Landing Page"
-                         onmouseover="handleMouseOver(this)"
-                         onmouseout="handleMouseOut(this)"
-                         onclick="handleClick(this)">
+                         onmouseover="manejarMouseSobre(this)"
+                         onmouseout="manejarMouseFuera(this)"
+                         onclick="manejarClick(this)">
                         
-                        <img src="https://placehold.co/600x400/5F7D9B/EBF2FA?text=Landing+Page" alt="Proyecto Landing Page" class="card-proyecto-img">
-                        <div class="card-body">
-                            <h3 class="card-title">Landing Page Estática</h3>
-                            <p class="card-text">
-                                Una página de aterrizaje responsiva construida con HTML y CSS puro.
+                        <img src="static/resource/img/contador_like.png" alt="Proyecto Landing Page" class="img-tarjeta-proyecto">
+                        <div class="cuerpo-tarjeta">
+                            <h3 class="titulo-tarjeta">Contador de likes</h3>
+                            <p class="texto-tarjeta">
+                                Una pagina para visualizar el funcionamiento de los contadores de likes
+                                en las redes sociales.
                             </p>
                             <span class="btn-ver-repo">
                                 Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
@@ -298,20 +268,19 @@
                     </div>
                 </div>
 
-                <!-- Proyecto 2: CRUD -->
                 <div class="col-md-6 col-lg-3 animar" data-delay="100">
-                    <div class="card-proyecto" 
-                         data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/CRUD%20de%20Clientes" 
-                         title="Haz clic para ver el repositorio del CRUD"
-                         onmouseover="handleMouseOver(this)"
-                         onmouseout="handleMouseOut(this)"
-                         onclick="handleClick(this)">
+                    <div class="tarjeta-proyecto" 
+                         data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/25_onmouseover_onmouseout" 
+                         title="Haz clic para ver el repositorio del Formulario"
+                         onmouseover="manejarMouseSobre(this)"
+                         onmouseout="manejarMouseFuera(this)"
+                         onclick="manejarClick(this)">
                         
-                        <img src="https://placehold.co/600x400/3B536D/EBF2FA?text=App+CRUD" alt="Proyecto CRUD" class="card-proyecto-img">
-                        <div class="card-body">
-                            <h3 class="card-title">Aplicación CRUD de Clientes</h3>
-                            <p class="card-text">
-                                Aplicación (CRUD) usando JavaScript y almacenamiento local.
+                        <img src="static/resource/img/video_lab.png" alt="Proyecto Formulario con JS" class="img-tarjeta-proyecto">
+                        <div class="cuerpo-tarjeta">
+                            <h3 class="titulo-tarjeta">VideoLab</h3>
+                            <p class="texto-tarjeta">
+                                Simulacion de una pagina para la visualizacion de videos.
                             </p>
                             <span class="btn-ver-repo">
                                 Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
@@ -320,20 +289,19 @@
                     </div>
                 </div>
                 
-                <!-- Proyecto 3: Consumo de API -->
                 <div class="col-md-6 col-lg-3 animar" data-delay="200">
-                    <div class="card-proyecto" 
-                         data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/Consumo%20de%20API%20Rest" 
-                         title="Haz clic para ver el repositorio de Consumo API"
-                         onmouseover="handleMouseOver(this)"
-                         onmouseout="handleMouseOut(this)"
-                         onclick="handleClick(this)">
+                    <div class="tarjeta-proyecto" 
+                         data-link="https://github.com/Alexander-Bustamante/Des-App-Web/tree/main/26_onchange" 
+                         title="Haz clic para ver el repositorio de Login"
+                         onmouseover="manejarMouseSobre(this)"
+                         onmouseout="manejarMouseFuera(this)"
+                         onclick="manejarClick(this)">
                         
-                        <img src="https://placehold.co/600x400/1B2A41/EBF2FA?text=Consumo+API" alt="Proyecto Consumo API" class="card-proyecto-img">
-                        <div class="card-body">
-                            <h3 class="card-title">Consumo de API REST</h3>
-                            <p class="card-text">
-                                Proyecto que se conecta a una API pública para mostrar datos dinámicos.
+                        <img src="static/resource/img/dojo_weather.png" alt="Proyecto Login con JS" class="img-tarjeta-proyecto">
+                        <div class="cuerpo-tarjeta">
+                            <h3 class="titulo-tarjeta">DojoWeather</h3>
+                            <p class="texto-tarjeta">
+                                Simulacion del funcionamiento de una pagina del clima.
                             </p>
                             <span class="btn-ver-repo">
                                 Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
@@ -342,20 +310,20 @@
                     </div>
                 </div>
 
-                <!-- Proyecto 4: Mi_Turno (Añadido) -->
                 <div class="col-md-6 col-lg-3 animar" data-delay="300">
-                    <div class="card-proyecto" 
+                    <div class="tarjeta-proyecto" 
                          data-link="https://github.com/maximilianoreyes1/Mi_Turno" 
-                         title="Haz clic para ver el repositorio de Mi_Turno"
-                         onmouseover="handleMouseOver(this)"
-                         onmouseout="handleMouseOut(this)"
-                         onclick="handleClick(this)">
+                         title="Haz clic para ver el repositorio de Página Bootstrap"
+                         onmouseover="manejarMouseSobre(this)"
+                         onmouseout="manejarMouseFuera(this)"
+                         onclick="manejarClick(this)">
                         
-                        <img src="static/resource/img/mi_turno.png" alt="Proyecto Mi Turno" class="card-proyecto-img">
-                        <div class="card-body">
-                            <h3 class="card-title">Proyecto "Mi Turno"</h3>
-                            <p class="card-text">
-                                Sistema de gestión de tareas, un proyecto colaborativo más complejo.
+                        <img src="static/resource/img/mi_turno.png" alt="Proyecto Página con Bootstrap" class="img-tarjeta-proyecto">
+                        <div class="cuerpo-tarjeta">
+                            <h3 class="titulo-tarjeta">Mi Turno</h3>
+                            <p class="texto-tarjeta">
+                                Aplicacion web que busca solucionar la gestion de tareas del hogar, 
+                                este es un proyecto más complejo.
                             </p>
                             <span class="btn-ver-repo">
                                 Ver Repositorio <i class="fa-solid fa-arrow-right-long ms-1"></i>
@@ -364,10 +332,9 @@
                     </div>
                 </div>
 
-            </div> <!-- Cierre de .row g-4 -->
+            </div> 
         </section>
 
-        <!-- ===== SECCIÓN CONTACTO ===== -->
         <section id="contacto" class="container-fluid">
             <h2 class="titulo-seccion text-center mx-auto animar">Hablemos</h2>
             <p class="text-center lead mb-5 animar" data-delay="100">
@@ -376,7 +343,7 @@
             
             <div class="row justify-content-center">
                 <div class="col-lg-8 animar" data-delay="200">
-                    <form id="contact-form" action="#" method="POST" onsubmit="handleFormSubmit(event)">
+                    <form id="formulario-contacto" action="#" method="POST" onsubmit="manejarEnvioFormulario(event)">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="nombre" class="form-label">Nombre</label>
@@ -385,9 +352,9 @@
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required 
-                                       aria-describedby="validation-message"
-                                       onchange="validateEmail(this)">
-                                <div id="validation-message" class="form-text"></div>
+                                       aria-describedby="mensaje-validacion"
+                                       onchange="validarEmail(this)">
+                                <div id="mensaje-validacion" class="form-text"></div>
                             </div>
                             <div class="col-12">
                                 <label for="asunto" class="form-label">Asunto</label>
@@ -398,7 +365,7 @@
                                 <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn-principal mt-3" id="submit-button">Enviar Mensaje</button>
+                                <button type="submit" class="btn-principal mt-3" id="boton-enviar">Enviar Mensaje</button>
                             </div>
                         </div>
                     </form>
@@ -406,17 +373,17 @@
             </div>
         </section>
 
+        <footer class="pie-pagina-principal">
+            <p>&copy; 2024 Alexander Bustamante. Todos los derechos reservados.</p>
+        </footer>
+
     </main>
 
-    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Librería Anime.js (Añadida) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
-    <!-- Mi Script Personalizado -->
     <script src="static/js/script.js" defer></script>
 
 </body>
 </html>
-

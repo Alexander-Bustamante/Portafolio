@@ -1,91 +1,81 @@
-// --- 0. Ejecutar cuando el DOM esté listo ---
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Lógica de la Barra Lateral (Sidebar) ---
-    const sidebar = document.getElementById('sidebar');
-    const toggleButton = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('barra-lateral');
+    const toggleButton = document.getElementById('interruptor-barra-lateral');
 
     if (toggleButton) {
-        // Evento click en el botón de colapsar
         toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
+            sidebar.classList.toggle('colapsado');
         });
     }
 
-    // --- 2. Lógica de Navegación Activa (Scrollspy) ---
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+    const navLinks = document.querySelectorAll('.nav-barra-lateral .enlace-nav');
 
-    const activateNavLink = () => {
+    const activarEnlaceNav = () => {
         let index = sections.length;
         while(--index && window.scrollY + 100 < sections[index].offsetTop) {} 
-        navLinks.forEach((link) => link.classList.remove('active'));
+        navLinks.forEach((link) => link.classList.remove('activo'));
         if (navLinks[index]) {
-             navLinks[index].classList.add('active');
+             navLinks[index].classList.add('activo');
         }
     };
-    activateNavLink();
-    window.addEventListener('scroll', activateNavLink);
+    activarEnlaceNav();
+    window.addEventListener('scroll', activarEnlaceNav);
 
-    // --- 3. Animaciones de Inicio con Anime.js ---
-    // (Reemplaza las animaciones .animar-hero de CSS)
-
-    // Animación de entrada escalonada para el contenido del "hero"
     const heroTimeline = anime.timeline({
         easing: 'easeOutExpo',
-        delay: 500 // Empezar después de 500ms
+        delay: 500 
     });
     
     heroTimeline
     .add({
-        targets: '.hero-saludo',
+        targets: '.saludo-hero',
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800
     })
     .add({
-        targets: '.hero-titulo',
+        targets: '.titulo-hero',
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800
-    }, '-=600') // Empezar 600ms antes de que termine la anterior
+    }, '-=600') 
     .add({
-        targets: '.hero-subtitulo', // Contenedor del texto
+        targets: '.subtitulo-hero', 
         opacity: [0, 1],
         duration: 500
     }, '-=600')
     .add({
-        targets: '.hero-descripcion',
+        targets: '.descripcion-hero',
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800
     }, '-=600')
     .add({
-        targets: '.hero-botones',
+        targets: '.botones-hero',
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800
     }, '-=600')
     .add({
-        targets: '.tech-logos-container', // Logos para móvil/tablet
+        targets: '.contenedor-logos-tech', 
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800
     }, '-=600')
     .add({
-        targets: '.tech-static-container', // <--- ACTUALIZADO
+        targets: '.contenedor-estatico-tech', 
         opacity: [0, 1],
         scale: [0.8, 1],
         duration: 1000
     }, '-=600');
 
-    // Iniciar la animación de escritura *después* de que aparezca su contenedor
-    heroTimeline.finished.then(initTyping);
+    heroTimeline.finished.then(iniciarEscritura);
 
-    // Animación de pulso del botón principal
     anime({
         targets: '#inicio .btn-principal',
-        scale: [1, 1.03], // Un pulso más sutil
+        scale: [1, 1.03], 
         boxShadow: [
             '0 0 0 0 rgba(95, 125, 155, 0.4)',
             '0 0 0 12px rgba(95, 125, 155, 0)'
@@ -93,37 +83,32 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 2500,
         easing: 'easeOutExpo',
         loop: true,
-        delay: 2000 // Empezar después de la intro
+        delay: 2000 
     });
 
-
-    // --- 4. Lógica de Efecto de Escritura (Typing) ---
-    function initTyping() {
-        const typingElement = document.getElementById('typing-subtitle');
+    function iniciarEscritura() {
+        const typingElement = document.getElementById('subtitulo-escribiendo');
         if (typingElement) {
             const textToType = typingElement.getAttribute('data-text');
             let index = 0;
-            typingElement.innerHTML = ''; // Limpiar texto base
+            typingElement.innerHTML = ''; 
             
             function type() {
                 if (index < textToType.length) {
                     typingElement.innerHTML += textToType.charAt(index);
                     index++;
-                    setTimeout(type, 80); // Velocidad de escritura (ms)
+                    setTimeout(type, 80); 
                 } else {
-                    typingElement.innerHTML += '<span class="typing-cursor">|</span>';
+                    typingElement.innerHTML += '<span class="cursor-escribiendo">|</span>';
                 }
             }
-            type(); // Iniciar la escritura
+            type(); 
         }
     }
 
-    // --- 5. Lógica de Animaciones al Hacer Scroll (con Anime.js) ---
-    // (Reemplaza la lógica de .animar.visible de CSS)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Usar Anime.js en lugar de añadir una clase
                 anime({
                     targets: entry.target,
                     translateY: [30, 0],
@@ -131,72 +116,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     opacity: [0, 1],
                     duration: 1000,
                     easing: 'easeOutExpo',
-                    // Obtener el retraso del 'data-delay' o usar 0
                     delay: entry.target.dataset.delay || 0
                 });
-                observer.unobserve(entry.target); // Dejar de observar una vez animado
+                observer.unobserve(entry.target); 
             }
         });
     }, {
-        threshold: 0.1 // Activar cuando el 10% del elemento es visible
+        threshold: 0.1 
     });
 
-    // Observar todos los elementos con la clase '.animar'
     document.querySelectorAll('.animar').forEach(element => {
         observer.observe(element);
     });
 
 });
 
-
-// --- 6. Eventos de la Lista de Cotejo (usando 'this') ---
-// (Sin cambios)
-
-/**
- * Item 10: Evento onclick en las tarjetas de proyecto.
- * Abre el enlace del repositorio en una nueva pestaña.
- * @param {HTMLElement} element - El elemento (this) que recibió el clic.
- */
-function handleClick(element) {
-    const link = element.dataset.link; // Obtiene 'data-link' del HTML
+function manejarClick(element) {
+    const link = element.dataset.link; 
     if (link) {
         window.open(link, '_blank');
     }
 }
 
-/**
- * Item 8 y 13: Evento onmouseover en las tarjetas de proyecto.
- * Cambia el estilo del borde y la sombra.
- * @param {HTMLElement} element - El elemento (this) sobre el que está el cursor.
- */
-function handleMouseOver(element) {
-    // 'this' (pasado como 'element') se refiere a la .card-proyecto
+function manejarMouseSobre(element) {
     element.style.borderColor = 'var(--color-medium-blue)';
-    element.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)'; // Aumentar sombra
+    element.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)'; 
 }
 
-/**
- * Item 9: Evento onmouseout en las tarjetas de proyecto.
- * Restaura el estilo original del borde y la sombra.
- * @param {HTMLElement} element - El elemento (this) del que salió el cursor.
- */
-function handleMouseOut(element) {
-    // 'this' (pasado como 'element') se refiere a la .card-proyecto
-    element.style.borderColor = 'transparent'; // Restaurar borde
-    element.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)'; // Sombra original
+function manejarMouseFuera(element) {
+    element.style.borderColor = 'transparent'; 
+    element.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)'; 
 }
 
-/**
- * Item 11: Evento onchange en el input de email.
- * Valida el formato del correo.
- * @param {HTMLInputElement} input - El input (this) que cambió.
- */
-function validateEmail(input) {
-    // 'this' (pasado como 'input') se refiere al input#email
+function validarEmail(input) {
     const email = input.value;
-    const validationMessage = document.getElementById('validation-message');
+    const validationMessage = document.getElementById('mensaje-validacion');
     
-    // Simple validación para el ejemplo
     if (email && !email.includes('@')) {
         validationMessage.textContent = 'Por favor, introduce un correo válido.';
         validationMessage.style.color = 'red';
@@ -208,29 +163,22 @@ function validateEmail(input) {
     }
 }
 
-/**
- * Maneja el envío del formulario de contacto.
- * @param {Event} event - El evento de envío del formulario.
- */
-function handleFormSubmit(event) {
-    event.preventDefault(); // Evita que la página se recargue
+function manejarEnvioFormulario(event) {
+    event.preventDefault(); 
     
-    const contactForm = document.getElementById('contact-form');
-    const submitButton = document.getElementById('submit-button');
-    const validationMessage = document.getElementById('validation-message');
+    const contactForm = document.getElementById('formulario-contacto');
+    const submitButton = document.getElementById('boton-enviar');
+    const validationMessage = document.getElementById('mensaje-validacion');
 
-    // Simular envío
     submitButton.innerHTML = '<i class="fa-solid fa-check me-2"></i> ¡Enviado!';
     submitButton.disabled = true;
 
-    // Resetear el formulario después de 3 segundos
     setTimeout(() => {
          submitButton.innerHTML = 'Enviar Mensaje';
          submitButton.disabled = false;
-         contactForm.reset(); // Limpiar formulario
+         contactForm.reset(); 
          if(validationMessage) {
-            validationMessage.textContent = ''; // Limpiar validación
+            validationMessage.textContent = ''; 
          }
     }, 3000);
 }
-
