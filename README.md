@@ -39,14 +39,23 @@ cd Portafolio
 ## Estructura del Proyecto
 Portafolio/
 │
+
 ├── index.html # Página principal
+
 ├── README.md # Documentación del proyecto
+
 └── static/
+
 ├── css/
+
 │ └── style.css # Estilos CSS principales
+
 ├── js/
+
 │ └── script.js # Scripts JavaScript
+
 └── resource/
+
 └── img/
 
 ## Cómo Contribuir
