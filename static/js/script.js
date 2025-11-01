@@ -1,34 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const sidebar = document.getElementById('barra-lateral');
-    const toggleButton = document.getElementById('interruptor-barra-lateral');
+    const barraLateral = document.getElementById('barra-lateral');
+    const botonInterruptor = document.getElementById('interruptor-barra-lateral');
 
-    if (toggleButton) {
-        toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('colapsado');
+    if (botonInterruptor) {
+        botonInterruptor.addEventListener('click', () => {
+            barraLateral.classList.toggle('colapsado');
         });
     }
 
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-barra-lateral .enlace-nav');
+    const secciones = document.querySelectorAll('section[id]');
+    const enlacesNav = document.querySelectorAll('.nav-barra-lateral .enlace-nav');
 
     const activarEnlaceNav = () => {
-        let index = sections.length;
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {} 
-        navLinks.forEach((link) => link.classList.remove('activo'));
-        if (navLinks[index]) {
-             navLinks[index].classList.add('activo');
+        let indice = secciones.length;
+        while(--indice && window.scrollY + 100 < secciones[indice].offsetTop) {} 
+        
+        enlacesNav.forEach((enlace) => enlace.classList.remove('activo'));
+        
+        if (enlacesNav[indice] && !enlacesNav[indice].closest('.pie-barra-lateral')) {
+             enlacesNav[indice].classList.add('activo');
         }
     };
     activarEnlaceNav();
     window.addEventListener('scroll', activarEnlaceNav);
 
-    const heroTimeline = anime.timeline({
+    const lineaTiempoHero = anime.timeline({
         easing: 'easeOutExpo',
-        delay: 500 
+        delay: 500
     });
     
-    heroTimeline
+    lineaTiempoHero
     .add({
         targets: '.saludo-hero',
         opacity: [0, 1],
@@ -40,9 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800
-    }, '-=600') 
+    }, '-=600')
     .add({
-        targets: '.subtitulo-hero', 
+        targets: '.subtitulo-hero',
         opacity: [0, 1],
         duration: 500
     }, '-=600')
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 800
     }, '-=600')
     .add({
-        targets: '.contenedor-logos-tech', 
+        targets: '.contenedor-logos-tech',
         opacity: [0, 1],
         translateY: [20, 0],
         duration: 800
@@ -71,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 1000
     }, '-=600');
 
-    heroTimeline.finished.then(iniciarEscritura);
+    lineaTiempoHero.finished.then(iniciarEscritura);
 
     anime({
         targets: '#inicio .btn-principal',
-        scale: [1, 1.03], 
+        scale: [1, 1.03],
         boxShadow: [
             '0 0 0 0 rgba(95, 125, 155, 0.4)',
             '0 0 0 12px rgba(95, 125, 155, 0)'
@@ -83,102 +85,115 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 2500,
         easing: 'easeOutExpo',
         loop: true,
-        delay: 2000 
+        delay: 2000
     });
 
     function iniciarEscritura() {
-        const typingElement = document.getElementById('subtitulo-escribiendo');
-        if (typingElement) {
-            const textToType = typingElement.getAttribute('data-text');
-            let index = 0;
-            typingElement.innerHTML = ''; 
+        const elementoEscribiendo = document.getElementById('subtitulo-escribiendo');
+        if (elementoEscribiendo) {
+            const textoAEscribir = elementoEscribiendo.getAttribute('data-text');
+            let indice = 0;
+            elementoEscribiendo.innerHTML = '';
             
-            function type() {
-                if (index < textToType.length) {
-                    typingElement.innerHTML += textToType.charAt(index);
-                    index++;
-                    setTimeout(type, 80); 
+            function escribir() {
+                if (indice < textoAEscribir.length) {
+                    elementoEscribiendo.innerHTML += textoAEscribir.charAt(indice);
+                    indice++;
+                    setTimeout(escribir, 80);
                 } else {
-                    typingElement.innerHTML += '<span class="cursor-escribiendo">|</span>';
+                    elementoEscribiendo.innerHTML += '<span class="typing-cursor">|</span>';
                 }
             }
-            type(); 
+            escribir();
         }
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
+    const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach(entrada => {
+            if (entrada.isIntersecting) {
                 anime({
-                    targets: entry.target,
+                    targets: entrada.target,
                     translateY: [30, 0],
                     scale: [0.98, 1],
                     opacity: [0, 1],
                     duration: 1000,
                     easing: 'easeOutExpo',
-                    delay: entry.target.dataset.delay || 0
+                    delay: entrada.target.dataset.delay || 0
                 });
-                observer.unobserve(entry.target); 
+                observador.unobserve(entrada.target);
             }
         });
     }, {
-        threshold: 0.1 
+        threshold: 0.1
     });
 
-    document.querySelectorAll('.animar').forEach(element => {
-        observer.observe(element);
+    document.querySelectorAll('.animar').forEach(elemento => {
+        observador.observe(elemento);
     });
 
 });
 
-function manejarClick(element) {
-    const link = element.dataset.link; 
-    if (link) {
-        window.open(link, '_blank');
+function manejarClick(elemento) {
+    const enlace = elemento.dataset.link;
+    if (enlace) {
+        window.open(enlace, '_blank');
     }
 }
 
-function manejarMouseSobre(element) {
-    element.style.borderColor = 'var(--color-medium-blue)';
-    element.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)'; 
+function manejarMouseSobre(elemento) {
+    elemento.style.borderColor = 'var(--color-medium-blue)';
+    elemento.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)'; 
 }
 
-function manejarMouseFuera(element) {
-    element.style.borderColor = 'transparent'; 
-    element.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)'; 
+function manejarMouseFuera(elemento) {
+    elemento.style.borderColor = 'transparent'; 
+    elemento.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)'; 
 }
 
 function validarEmail(input) {
     const email = input.value;
-    const validationMessage = document.getElementById('mensaje-validacion');
+    const mensajeValidacion = document.getElementById('mensaje-validacion');
     
     if (email && !email.includes('@')) {
-        validationMessage.textContent = 'Por favor, introduce un correo válido.';
-        validationMessage.style.color = 'red';
+        mensajeValidacion.textContent = 'Por favor, introduce un correo válido.';
+        mensajeValidacion.style.color = 'red';
     } else if (email) {
-        validationMessage.textContent = 'Formato de correo correcto.';
-        validationMessage.style.color = 'green';
+        mensajeValidacion.textContent = 'Formato de correo correcto.';
+        mensajeValidacion.style.color = 'green';
     } else {
-        validationMessage.textContent = '';
+        mensajeValidacion.textContent = '';
     }
 }
 
-function manejarEnvioFormulario(event) {
-    event.preventDefault(); 
+function manejarEnvioFormulario(evento) {
+    evento.preventDefault(); 
     
-    const contactForm = document.getElementById('formulario-contacto');
-    const submitButton = document.getElementById('boton-enviar');
-    const validationMessage = document.getElementById('mensaje-validacion');
+    const formularioContacto = document.getElementById('formulario-contacto');
+    const botonEnviar = document.getElementById('boton-enviar');
+    const mensajeValidacion = document.getElementById('mensaje-validacion');
 
-    submitButton.innerHTML = '<i class="fa-solid fa-check me-2"></i> ¡Enviado!';
-    submitButton.disabled = true;
+    botonEnviar.innerHTML = '<i class="fa-solid fa-check me-2"></i> ¡Enviado!';
+    botonEnviar.disabled = true;
 
     setTimeout(() => {
-         submitButton.innerHTML = 'Enviar Mensaje';
-         submitButton.disabled = false;
-         contactForm.reset(); 
-         if(validationMessage) {
-            validationMessage.textContent = ''; 
+         botonEnviar.innerHTML = 'Enviar Mensaje';
+         botonEnviar.disabled = false;
+         formularioContacto.reset(); 
+         if(mensajeValidacion) {
+            mensajeValidacion.textContent = ''; 
          }
     }, 3000);
+}
+
+function mostrarContacto(boton) {
+    const contenedorContacto = boton.previousElementSibling;
+    const estaVisible = contenedorContacto.classList.contains('visible');
+
+    if (estaVisible) {
+        contenedorContacto.classList.remove('visible');
+        boton.textContent = 'Ver Contacto';
+    } else {
+        contenedorContacto.classList.add('visible');
+        boton.textContent = 'Ocultar Contacto';
+    }
 }
